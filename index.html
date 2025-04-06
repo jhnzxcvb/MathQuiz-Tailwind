@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    .fancy-text {
+      font-family: 'Luckiest Guy', cursive;
+      text-shadow: 3px 5px 0 rgb(255, 255, 150);
+      letter-spacing: 2px;
+    }
+    @media (min-width: 768px) {
+      .fancy-text {
+        letter-spacing: 8px;
+      }
+    }
+    .blurred {
+      filter: blur(5px);
+      pointer-events: none;
+    }
+    .custom-shadow {
+      box-shadow: 10px 15px 10px rgba(0, 0, 0, 0.8);
+    }
+    .modal-center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .bg-container {
+      background-image: url('/src/images/kid2.png');
+      background-size: cover;           /* Ensures image covers the whole container */
+      background-position: center;      /* Centers the image */
+      background-repeat: no-repeat;
+      background-attachment: fixed;     /* Optional: adds a subtle parallax effect */
+    }
+
+    /* Add semi-transparent overlay to ensure text readability */
+    .content-overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+    }
+    @media (max-width: 450px) {
+      .bg-container {
+        background-image: url('/src/images/kidmobile.png');
+        background-size: cover;            /* change from 'contain' to 'cover' for full fit */
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .content-container {
+        margin-top: 100vw; /* Adjust this if image is too tall or too short */
+      }
+    }
+
+  </style>
+</head>
+<body class="min-h-screen bg-white">
+  <div id="home-screen" class="bg-container flex flex-col md:flex-row w-full min-h-screen overflow-hidden">
+    
+    <!-- Content Section (Right Side) -->
+    <div class="w-full sm:w-1/2 ml-auto content-container">
+      <div class="content-overlay w-full h-full p-4 md:p-8 lg:p-16 flex flex-col items-center justify-center text-center md:rounded-l-3xl">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-purple-700 fancy-text">
+          Math Quiz
+        </h1>
+        <p class="text-xl sm:text-2xl md:text-3xl font-extrabold mt-3 md:mt-6">Fun & Learning Combined</p>
+        <p class="text-lg sm:text-xl md:text-2xl font-extrabold">Play, Solve, Grow!</p>
+        <button onclick="showGreetingBox()" class="mt-4 sm:mt-6 md:mt-8 lg:mt-10 bg-yellow-400 hover:bg-yellow-500 text-black font-extrabold py-3 md:py-4 px-8 sm:px-12 md:px-16 lg:px-20 rounded-3xl text-lg sm:text-xl md:text-2xl shadow-md transition-colors duration-300">
+          START
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Greeting Box -->
+  <div id="greeting_box" class="hidden fixed modal-center bg-white custom-shadow rounded-3xl w-11/12 sm:w-4/5 md:w-2/3 lg:w-1/2 p-4 sm:p-6 md:p-8 text-center border border-gray-300 z-50">
+    <button onclick="closeGreetingBox()" class="absolute top-3 right-3 w-8 h-8 text-lg">✖</button>
+    <div class="text-xl sm:text-2xl md:text-3xl font-extrabold text-purple-700 mb-3 md:mb-4">HELLO, YOUNG MATHEMATICIAN 🎉</div>
+    <p class="text-base sm:text-lg text-gray-700 mb-3 md:mb-4">Welcome to the Math Quiz! What's your name?</p>
+    <input id="player_name" type="text" placeholder="Enter your name" class="w-full max-w-md px-4 py-2 text-lg border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+    <div class="flex justify-center mt-4 md:mt-6">
+      <button onclick="showRulesBox()" class="bg-yellow-400 hover:bg-yellow-500 text-black py-2 md:py-3 px-6 md:px-8 rounded-lg text-base sm:text-lg font-extrabold transition-colors duration-300">Let's Go!</button>
+    </div>
+  </div>
+
+  <!-- Rules Box -->
+  <div id="rules_box" class="hidden fixed modal-center bg-white custom-shadow rounded-3xl w-11/12 sm:w-4/5 md:w-2/3 lg:w-1/2 p-4 sm:p-6 md:p-8 text-center border border-gray-300 z-50">
+    <button onclick="closeRulesBox()" class="absolute top-3 right-3 w-8 h-8 text-lg">✖</button>
+    <div class="text-xl sm:text-2xl md:text-3xl font-extrabold text-purple-700 mb-3 md:mb-4">QUIZ RULES 📜</div>
+    <p class="text-base sm:text-lg text-gray-700 mb-3 md:mb-4">1. You will be given 10 random math questions.<br>2. Each question has four choices.<br>3. Try to answer as many as you can correctly!<br>4. Have fun and do your best!</p>
+    <div class="flex justify-center mt-4 md:mt-6">
+      <button onclick="startQuiz()" class="bg-yellow-400 hover:bg-yellow-500 text-black py-2 md:py-3 px-6 md:px-8 rounded-lg text-base sm:text-lg font-extrabold transition-colors duration-300">Start Quiz!</button>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
