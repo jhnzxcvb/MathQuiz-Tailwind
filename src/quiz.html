@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Quiz - Questions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+  <link href="/dist/output.css" rel="stylesheet">
+  <style>
+    .question-text {
+        font-family: 'Fredoka', sans-serif;
+        line-height: 1.5;
+    }
+    .custom-shadow {
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    body {
+      min-height: 100vh;
+      /* Support for older browsers */
+      min-height: -webkit-fill-available;
+    }
+    html {
+      height: -webkit-fill-available;
+    }
+    /* Prevent content from being hidden under notches or status bars on mobile */
+    @supports (padding: max(0px)) {
+      body {
+        padding-left: max(8px, env(safe-area-inset-left));
+        padding-right: max(8px, env(safe-area-inset-right));
+        padding-top: max(8px, env(safe-area-inset-top));
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+      }
+    }
+    @media (min-width: 768px) {
+      .desktop-container {
+        width: 80%;
+        max-width: 900px;
+      }
+      .question-container {
+        min-height: 180px;
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('/src/images/bg.jpg')">
+    <h1 class="text-2xl md:text-4xl font-bold mb-2 md:mb-6">Math Quiz</h1>
+    
+    <!-- Main Quiz Container -->
+    <div class="w-full md:w-4/5 max-w-md md:max-w-2xl mx-auto bg-purple-500 p-4 md:p-8 rounded-3xl shadow-lg border border-gray-300 text-center flex flex-col desktop-container">
+        
+        <!-- Timer and Progress Bar -->
+        <div class="flex justify-between items-center mb-2 md:mb-6 px-2 md:px-4">
+            <button onclick="goBack()" class="text-lg md:text-2xl bg-white px-2 py-1 md:px-4 md:py-2 rounded-full shadow-md">⬅</button>
+            <div id="timer" class="bg-yellow-400 text-black font-bold py-1 px-3 rounded-3xl text-base md:text-xl flex items-center justify-center">
+                20
+            </div>
+            <div class="text-white font-semibold text-xs md:text-lg">
+                <span id="question-number">1</span> of 10
+            </div>
+        </div>  
+    
+        <!-- Question Container -->
+        <div class="bg-purple-500 p-3 md:p-8 rounded-xl flex mx-auto justify-center mb-4 flex-grow question-container">
+            <div id="question" class="text-3xl md:text-5xl text-white question-text flex items-center">
+                Loading question...
+            </div>
+        </div>
+
+        <!-- Choices Grid -->
+        <div class="bg-purple-500 flex mx-auto justify-center w-full mt-2 md:mt-6">
+            <div id="choices" class="grid grid-cols-2 gap-x-2 md:gap-x-6 gap-y-2 md:gap-y-6 w-full">
+                <!-- Choices will be dynamically inserted here -->
+            </div>
+        </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

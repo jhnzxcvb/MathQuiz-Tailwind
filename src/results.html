@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Math Quiz - Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet">
+  <style>
+    .font-fredoka {
+      font-family: 'Fredoka', sans-serif;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      overflow: hidden; /* Prevent body from scrolling */
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center p-4" style="background-image: url('/src/images/bg.jpg');">
+
+  <div class="w-full max-w-6xl bg-violet-400/90 p-6 sm:p-8 md:p-10 lg:p-12 rounded-xl shadow-xl flex flex-col items-center justify-between text-center font-fredoka h-full">
+
+    <!-- Header -->
+    <div class="mt-4 flex-grow-0">
+      <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-black">Learning Progress</h1>
+    </div>  
+
+    <!-- Player Name -->
+    <div class="text-white text-lg sm:text-xl md:text-2xl flex-grow-0">Great work, <span id="player-name">Player</span>!</div>
+
+    <!-- Result Heading -->
+    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-yellow-300 mb-6 flex-grow-0" id="result-heading">Great Job!</h2>
+
+    <!-- Circular Progress -->
+    <div class="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 mb-6 aspect-w-1 aspect-h-1">
+        <div id="circularProgress" class="w-full h-full rounded-full flex items-center justify-center"
+             style="background: conic-gradient(#a78bfa 0%, rgba(255,255,255,0.3) 0%)">
+          <div class="absolute w-4/5 h-4/5 bg-violet-500 rounded-full flex flex-col items-center justify-center">
+            <span class="text-white text-sm sm:text-base">Accuracy</span>
+            <span id="accuracy-value" class="text-4xl sm:text-5xl md:text-6xl font-bold text-white">0%</span>
+          </div>
+        </div>
+      </div>
+
+    <!-- Stats -->
+    <div class="flex flex-wrap gap-6 justify-center mb-6">
+      <!-- Correct -->
+      <div class="flex items-center bg-white/30 text-white font-bold px-6 py-4 rounded-full gap-4 hover:scale-105 transition">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-green-500 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="white" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="text-left">
+          <div id="correct-value" class="text-2xl sm:text-3xl">0</div>
+          <div class="text-sm">Correct</div>
+        </div>
+      </div>
+
+      <!-- Incorrect -->
+      <div class="flex items-center bg-white/30 text-white font-bold px-6 py-4 rounded-full gap-4 hover:scale-105 transition">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-red-500 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="white" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="text-left">
+          <div id="incorrect-value" class="text-2xl sm:text-3xl">0</div>
+          <div class="text-sm">Incorrect</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-6">
+      <div onclick="retakeQuiz()" class="flex items-center justify-center bg-yellow-400 text-white font-bold px-6 py-3 sm:py-4 rounded-full gap-3 cursor-pointer hover:scale-105 transition text-base sm:text-lg md:text-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="white" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+        </svg>
+        <span>Retake</span>
+      </div>
+
+      <div onclick="goHome()" class="flex items-center justify-center bg-green-500 text-white font-bold px-6 py-3 sm:py-4 rounded-full gap-3 cursor-pointer hover:scale-105 transition text-base sm:text-lg md:text-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-6 sm:h-6" fill="white" viewBox="0 0 20 20">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+        </svg>
+        <span>Home</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function goHome() {
+      window.location.href = 'index.html';
+    }
+    function retakeQuiz() {
+      window.location.href = 'quiz.html';
+    }
+    function updateQuizResults() {
+      const score = parseInt(localStorage.getItem('quizScore') || '0');
+      const totalQuestions = parseInt(localStorage.getItem('totalQuestions') || '10');
+      const accuracy = Math.round((score / totalQuestions) * 100);
+      const incorrect = totalQuestions - score;
+
+      document.getElementById('circularProgress').style.background =
+        `conic-gradient(#a78bfa ${accuracy}%, rgba(255,255,255,0.3) 0%)`;
+
+      document.getElementById('accuracy-value').textContent = `${accuracy}%`;
+      document.getElementById('correct-value').textContent = score;
+      document.getElementById('incorrect-value').textContent = incorrect;
+
+      const resultHeading = document.getElementById('result-heading');
+      resultHeading.textContent = accuracy >= 80 ? 'Great Job!' : accuracy >= 50 ? 'Good Try!' : 'Keep Practicing!';
+
+      const playerName = localStorage.getItem('playerName');
+      if (playerName) document.getElementById('player-name').textContent = playerName;
+    }
+    document.addEventListener('DOMContentLoaded', updateQuizResults);
+  </script>
+</body>
+</html>
